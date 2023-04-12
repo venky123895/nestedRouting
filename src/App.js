@@ -1,23 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Home from './Components/Home';
+import LoginPage from './Components/LoginPage';
+import Navbar from './Components/Navbar';
+import { useContext } from 'react';
+import { myGlobalData } from './Components/Context';
+import {Routes,Route} from 'react-router-dom'
+import Products from './Components/Products';
+import Html from './Components/Html';
+import Css from './Components/Css';
+import Javascript from './Components/Javascript';
+import Reactjs from './Components/Reactjs';
 function App() {
+  const{isLoggedint}=useContext(myGlobalData)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        isLoggedint ? (<> <Navbar/>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/home' element={<Home/>}/>
+          <Route path='/products' element={<Products/>}>
+          <Route path='' element={<Html/>}/>
+            <Route path='html' element={<Html/>}/>
+            <Route path='css' element={<Css/>}/>
+            <Route path='js' element={<Javascript/>}/>
+            <Route path='react' element={<Reactjs/>}/>
+    
+          </Route>
+        </Routes></>) : <LoginPage/>
+      }
+   
+      
     </div>
   );
 }
